@@ -72,7 +72,8 @@ public class GroupTreeCellRenderer extends DefaultTreeCellRenderer {
             label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         else
             label.setBorder(BorderFactory.createEmptyBorder());
-        boolean italics = Globals.prefs.getBoolean("groupShowDynamic")
+        //boolean italics = Globals.prefs.getBoolean("groupShowDynamic")
+        boolean italics = false
         && group.isDynamic();
         boolean red = false;
         if (highlight2Cells != null) {
@@ -105,7 +106,8 @@ public class GroupTreeCellRenderer extends DefaultTreeCellRenderer {
         if (italics)
             sb.append("<i>");
         sb.append(Util.quoteForHTML(name));
-        if (Globals.prefs.getBoolean(JabRefPreferences.GROUP_SHOW_NUMBER_OF_ELEMENTS)) {
+        //if (Globals.prefs.getBoolean(JabRefPreferences.GROUP_SHOW_NUMBER_OF_ELEMENTS)) {
+        if (false) {
         	if (group instanceof ExplicitGroup) {
         	    sb.append(" [").append(((ExplicitGroup) group).getNumEntries()).append("]");
         	} else if ((group instanceof KeywordGroup) || (group instanceof SearchGroup)) {
@@ -129,7 +131,8 @@ public class GroupTreeCellRenderer extends DefaultTreeCellRenderer {
         if (!label.getText().equals(text))
             label.setText(text);
         label.setToolTipText("<html>" + group.getShortDescription() + "</html>");
-        if (Globals.prefs.getBoolean("groupShowIcons")) {
+        //if (Globals.prefs.getBoolean("groupShowIcons")) {
+        if (true) {
             switch (group.getHierarchicalContext()) {
             case AbstractGroup.REFINING:
                 if (label.getIcon() != groupRefiningIcon)

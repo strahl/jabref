@@ -97,7 +97,8 @@ public class MainTableFormat implements TableFormat<BibtexEntry> {
         if (col == 0) {
             return GUIGlobals.NUMBER_COL;
         } else if (getIconTypeForColumn(col) != null) {
-            if (JabRef.jrf.prefs().getBoolean(JabRefPreferences.SHOWONELETTERHEADINGFORICONCOLUMNS)) {
+            //if (JabRef.jrf.prefs().getBoolean(JabRefPreferences.SHOWONELETTERHEADINGFORICONCOLUMNS)) {
+            if (false) {
                 return getIconTypeForColumn(col)[0].substring(0,1).toUpperCase();
             } else {
             	return null;

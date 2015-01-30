@@ -565,7 +565,8 @@ public class BibtexParser {
 		// Util.pr("Returning field content: "+value.toString());
 
 		// Check if we are to strip extra pairs of braces before returning:
-		if (Globals.prefs.getBoolean("autoDoubleBraces")) {
+		//if (Globals.prefs.getBoolean("autoDoubleBraces")) {
+		if (false) {
 			// Do it:
 			while ((value.length() > 1) && (value.charAt(0) == '{')
 				&& (value.charAt(value.length() - 1) == '}')) {

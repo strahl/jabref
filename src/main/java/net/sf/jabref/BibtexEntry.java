@@ -137,13 +137,15 @@ public class BibtexEntry
         }
 
         String suffix = "";
-		if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_ADDSPACES)) {
+		// if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_ADDSPACES)) {
+        if (true) {
 			for (int i = maxFieldLength - field.length(); i > 0; i--)
 				suffix += " ";
 		}
 
 		String res;
-		if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_CAMELCASENAME)) {
+		//if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_CAMELCASENAME)) {
+        if (false) {
 			if (tagDisplayNameMap.containsKey(field.toLowerCase())) {
 				res = tagDisplayNameMap.get(field.toLowerCase()) + suffix;
 			} else {
@@ -551,21 +553,20 @@ public class BibtexEntry
      * isDisplayableField(String).
      */
     public void write(Writer out, FieldFormatter ff, boolean write) throws IOException {
-        switch (Globals.prefs.getInt(JabRefPreferences.WRITEFIELD_SORTSTYLE)) {
-        case 0:
-            writeSorted(out, ff, write);
-            break;
-        case 1:
-            writeUnsorted(out, ff, write);
-            break;
-        case 2:
-            writeUserOrder(out,ff,write);
-            break;
+        // switch (Globals.prefs.getInt(JabRefPreferences.WRITEFIELD_SORTSTYLE)) {
+        switch (0) {
+                case 0:
+                    writeSorted(out, ff, write);
+                    break;
+                case 1:
+                    writeUnsorted(out, ff, write);
+                    break;
+                case 2:
+                    writeUserOrder(out,ff,write);
+                    break;
+            }
         }
-        
-        
-    }
-    
+
     
     /**
      * user defined order
@@ -746,7 +747,8 @@ public class BibtexEntry
     private boolean writeField(String name, Writer out,
                             FieldFormatter ff, boolean isNotFirst, boolean isNextGroup) throws IOException {
         String o = getField(name);
-        if (o != null || Globals.prefs.getBoolean("includeEmptyFields")) {
+        //if (o != null || Globals.prefs.getBoolean("includeEmptyFields")) {
+        if (o != null ) {
             if (isNotFirst)
                 out.write(","+Globals.NEWLINE);
             if (isNextGroup)

@@ -36,8 +36,9 @@ public class LatexFieldFormatter implements FieldFormatter {
 
     public String format(String text, String fieldName)
             throws IllegalArgumentException {
-        if (text == null) return Globals.prefs.getValueDelimiters(0)
-                + "" + Globals.prefs.getValueDelimiters(1);
+        //if (text == null) return Globals.prefs.getValueDelimiters(0)
+        //        + "" + Globals.prefs.getValueDelimiters(1);
+        if (text == null) return "{}";
 
         if (Globals.prefs.putBracesAroundCapitals(fieldName) && !Globals.BIBTEX_STRING.equals(fieldName)) {
             text = Util.putBracesAroundCapitals(text);
@@ -53,7 +54,8 @@ public class LatexFieldFormatter implements FieldFormatter {
         // If the field is non-standard, we will just append braces,
         // wrap and write.
         boolean resolveStrings = true;
-        if (Globals.prefs.getBoolean("resolveStringsAllFields")) {
+        //if (Globals.prefs.getBoolean("resolveStringsAllFields")) {
+        if (false) {
             // Resolve strings for all fields except some:
             String[] exceptions = Globals.prefs.getStringArray("doNotResolveStringsFor");
             for (String exception : exceptions) {
@@ -86,18 +88,21 @@ public class LatexFieldFormatter implements FieldFormatter {
                 throw new IllegalArgumentException("Curly braces { and } must be balanced.");
 
             sb = new StringBuffer(
-                    Globals.prefs.getValueDelimiters(0) + "");
+            //        Globals.prefs.getValueDelimiters(0) + "");
+                    "{");
             // No formatting at all for these fields, to allow custom formatting?
 //            if (Globals.prefs.getBoolean("preserveFieldFormatting"))
 //              sb.append(text);
 //            else
 //             currently, we do not do any more wrapping
-            if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_WRAPFIELD)&&!Globals.prefs.isNonWrappableField(fieldName))
+            //if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_WRAPFIELD)&&!Globals.prefs.isNonWrappableField(fieldName))
+            if (false&&!Globals.prefs.isNonWrappableField(fieldName))
                 sb.append(Util.wrap2(text, GUIGlobals.LINE_LENGTH));
             else
                 sb.append(text);
 
-            sb.append(Globals.prefs.getValueDelimiters(1));
+            //sb.append(Globals.prefs.getValueDelimiters(1));
+            sb.append("}");
 
             return sb.toString();
         }
@@ -156,7 +161,8 @@ public class LatexFieldFormatter implements FieldFormatter {
         }
 
         // currently, we do not add newlines and new formatting
-        if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_WRAPFIELD)&&!Globals.prefs.isNonWrappableField(fieldName)) {
+        //if (Globals.prefs.getBoolean(JabRefPreferences.WRITEFIELD_WRAPFIELD)&&!Globals.prefs.isNonWrappableField(fieldName)) {
+        if (false&&!Globals.prefs.isNonWrappableField(fieldName)) {
 //             introduce a line break to be read at the parser
              return Util.wrap2(sb.toString(), GUIGlobals.LINE_LENGTH);//, but that lead to ugly .tex
              
@@ -171,7 +177,8 @@ public class LatexFieldFormatter implements FieldFormatter {
         /*sb.append("{");
         sb.append(text.substring(start_pos, end_pos));
         sb.append("}");*/
-        sb.append(Globals.prefs.getValueDelimiters(0));
+        //sb.append(Globals.prefs.getValueDelimiters(0));
+        sb.append("{");
         boolean escape = false, inCommandName = false, inCommand = false,
                 inCommandOption = false;
         int nestedEnvironments = 0;
@@ -236,7 +243,8 @@ public class LatexFieldFormatter implements FieldFormatter {
                 sb.append(c);
             escape = (c == '\\');
         }
-        sb.append(Globals.prefs.getValueDelimiters(1));
+        //sb.append(Globals.prefs.getValueDelimiters(1));
+        sb.append("}");
     }
 
     private void writeStringLabel(String text, int start_pos, int end_pos,
